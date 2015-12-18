@@ -1,25 +1,22 @@
-<h1>Listing statuses</h1>
+<div class="page-header">
+  <h1>Todos los estados</h1>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Contenido</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= link_to "crear un nuevo post",new_status_path, class:"btn btn-success"  %>
+
+
 
 <% @statuses.each do |status| %>
-  <tr>
-    <td><%= status.name %></td>
-    <td><%= status.contenido %></td>
-    <td><%= link_to 'Show', status %></td>
-    <td><%= link_to 'Edit', edit_status_path(status) %></td>
-    <td><%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <div class="status">
+  <strong><%= status.name %></strong>
+  <p><%= status.contenido %></p>
+  <div>
+    <%= link_to "hace " + time_ago_in_words(status.created_at), status %>
+    <span class= "admin"> 
+    <%= link_to "Editar", edit_status_path(status) %>
+    <%= link_to "Borrar", status, method: :delete, data: {confirm: "¿Estás seguro que quieres borrar este estado?"} %>
+    </span>
+  </div>
+</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Status', new_status_path %>
+  
